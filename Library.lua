@@ -1,4 +1,4 @@
-local InputService = game:GetService('UserInputService');
+local InputService = game:GetService('UserInputService'); --lqn.cc
 local TextService = game:GetService('TextService');
 local CoreGui = game:GetService('CoreGui');
 local Teams = game:GetService('Teams');
