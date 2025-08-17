@@ -1,4 +1,4 @@
-local InputService = game:GetService('UserInputService'); --lqn.cc
+local InputService = game:GetService('UserInputService');
 local TextService = game:GetService('TextService');
 local CoreGui = game:GetService('CoreGui');
 local Teams = game:GetService('Teams');
@@ -29,12 +29,12 @@ local Library = {
 
     HudRegistry = {};
 
-    FontColor = Color3.fromRGB(255, 255, 255); -- White text, unchanged
-    MainColor = Color3.fromRGB(30, 30, 30); -- Dark gray for main background
-    BackgroundColor = Color3.fromRGB(25, 25, 25); -- Slightly darker gray for background
-    AccentColor = Color3.fromRGB(180, 180, 180); -- Light gray for highlights and enabled toggles
-    OutlineColor = Color3.fromRGB(50, 50, 50); -- Darker outline, unchanged
-    RiskColor = Color3.fromRGB(255, 50, 50); -- Red for risky, unchanged
+    FontColor = Color3.fromRGB(255, 255, 255);
+    MainColor = Color3.fromRGB(28, 28, 28);
+    BackgroundColor = Color3.fromRGB(20, 20, 20);
+    AccentColor = Color3.fromRGB(0, 85, 255);
+    OutlineColor = Color3.fromRGB(50, 50, 50);
+    RiskColor = Color3.fromRGB(255, 50, 50),
 
     Black = Color3.new(0, 0, 0);
     Font = Enum.Font.Code,
@@ -1175,6 +1175,10 @@ do
         end;
 
         function KeyPicker:GetState()
+            if InputService:GetFocusedTextBox() then
+                return false
+            end
+
             if KeyPicker.Mode == 'Always' then
                 return true;
             elseif KeyPicker.Mode == 'Hold' then
@@ -1193,7 +1197,7 @@ do
             else
                 return KeyPicker.Toggled;
             end;
-        end;
+        end
 
         function KeyPicker:SetValue(Data)
             local Key, Mode = Data[1], Data[2];
@@ -1282,6 +1286,8 @@ do
         end);
 
         Library:GiveSignal(InputService.InputBegan:Connect(function(Input)
+            if InputService:GetFocusedTextBox() then return end
+
             if (not Picking) then
                 if KeyPicker.Mode == 'Toggle' then
                     local Key = KeyPicker.Value;
@@ -1315,6 +1321,8 @@ do
         end))
 
         Library:GiveSignal(InputService.InputEnded:Connect(function(Input)
+            if InputService:GetFocusedTextBox() then return end
+
             if (not Picking) then
                 KeyPicker:Update();
             end;
