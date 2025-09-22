@@ -468,6 +468,10 @@ do
             Parent = ScreenGui,
         });
 
+        local Corner = Instance.new("UICorner")
+        Corner.CornerRadius = UDim.new(0, 5)
+        Corner.Parent = PickerFrameOuter
+
         DisplayFrame:GetPropertyChangedSignal('AbsolutePosition'):Connect(function()
             PickerFrameOuter.Position = UDim2.fromOffset(DisplayFrame.AbsolutePosition.X, DisplayFrame.AbsolutePosition.Y + 18);
         end)
@@ -1441,6 +1445,10 @@ do
                 Size = UDim2.new(1, -4, 0, 20);
                 ZIndex = 5;
             });
+            
+            local Corner = Instance.new("UICorner")
+            Corner.CornerRadius = UDim.new(0, 8)
+            Corner.Parent = Outer 
 
             local Inner = Library:Create('Frame', {
                 BackgroundColor3 = Library.MainColor;
